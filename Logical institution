@@ -1,0 +1,37 @@
+ORG 0000H
+
+SJMP 30H
+
+ORG 30H
+
+MOV A, 20h //do not use #, as data ram 20h is to be
+
+accessed MOV R1,A//X IN R1
+
+MOV A,21H //A -NUM1
+
+CJNE R1,#0,CKOR
+
+ANL A, 22H
+
+SJMP END1
+
+CKOR:CJNE R1,#01,CKXOR
+
+ORL A, 22H
+
+SJMP END1
+
+CKXOR:CJNE R1,#02,OTHER
+
+XRL A, 22H
+
+SJMP END1
+
+OTHER: CLR A
+
+END1: MOV 23H,A //STORE RESULT
+
+HERE: SJMP HERE
+
+END
