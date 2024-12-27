@@ -1,0 +1,69 @@
+#include <stdio.h>
+
+#include <reg51.h>
+
+sbit switch1 = P1^0;
+
+sbit switch2 = P1^1;
+
+sbit led1 = P2^0;
+
+sbit led2 = P2^1;
+
+void main()
+
+{
+
+ // Initialize both P1 and P2 to 0
+
+ P1 = 0x00; // Set P1 as input (default for 8051, high means no switch pressed)
+
+ P2 = 0x00; // Set P2 as output (initially both LEDs OFF)
+
+ while(1)
+
+ {
+
+ if ((switch1 == 0) && (switch2 == 0)) // Both switches pressed
+
+ {
+
+ led1 = 0; // LED1 OFF
+
+ led2 = 0; // LED2 OFF
+
+ }
+
+ else if ((switch1 == 0) && (switch2 == 1)) // Only switch1 pressed
+
+ {
+
+ led1 = 0; // LED1 OFF
+
+ led2 = 1; // LED2 ON
+
+ }
+
+ else if ((switch1 == 1) && (switch2 == 0)) // Only switch2 pressed
+
+ {
+
+ led1 = 1; // LED1 ON
+
+ led2 = 0; // LED2 OFF
+
+ }
+
+ else if ((switch1 == 1) && (switch2 == 1)) // Both switches not pressed
+
+ {
+
+ led1 = 1; // LED1 ON
+
+ led2 = 1; // LED2 ON
+
+ }
+
+ }
+
+}
