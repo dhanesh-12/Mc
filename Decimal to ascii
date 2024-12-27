@@ -1,0 +1,23 @@
+ORG 00H
+
+MAIN: MOV R0,#40h
+
+MOV R1,#50h
+
+MOV R2,#0AH
+
+BACK: MOV A,@R0 //stored decimal values 
+
+ORL A,#30H //are fetched ,they are ‘OR’ed with
+
+MOV @R1,A //30 and results are placed at memory 
+
+INC R0 //pointed by R1 pointer
+
+INC R1
+
+DJNZ R2,BACK
+
+SJMP $
+
+END
