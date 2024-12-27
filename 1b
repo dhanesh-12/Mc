@@ -1,0 +1,17 @@
+ORG 00H
+SJMP 30H
+ORG 30H
+MOV R0,#27H //source address
+MOV R1,#41H //destination address
+MOV R3,#05H //count
+BACK: MOVX A,@r0
+MOV r2,a
+MOVX a,@r1
+MOVX @r0,a
+MOV a, r2
+MOVX @r1,a
+INC R0
+INC R1
+DJNZ R3, BACK
+HERE: SJMP HERE
+END
