@@ -1,0 +1,69 @@
+#include <reg51.h>
+
+// Delay function
+
+void delay(int k)
+
+{
+
+ int i, j;
+
+ for (i = 0; i < k; i++)
+
+ {
+
+ for (j = 0; j < 10000; j++)
+
+ {
+
+ // Empty loop for delay
+
+ }
+
+ }
+
+}
+
+void main(void)
+
+{
+
+ int i;
+
+ char a[16] = {0x3f, 0x06, 0x5b, 0x4f, 0x66, 0x7d, 0x07, 0xFF, 0x67, 0x6f, 0x77, 0x7c, 0x39, 0x5e, 
+
+0x79, 0x71}; // 7-segment hex values for 0-15
+
+ // Initialize ports for the three 7-segment displays
+
+ P2 = 0x00; // First 7-segment display (MSD)
+
+ P3 = 0x00; // Second 7-segment display (Middle Digit)
+
+ P1 = 0x00; // Third 7-segment display (LSD)
+
+ while (1)
+
+ {
+
+ // Loop from 0x000 to 0xFFF (0 to 4095 in decimal)
+
+ for (i = 0; i < 4096; i++) // Count from 000h to FFFh
+
+ {
+
+ // Split the 12-bit number into three 4-bit parts and display them
+
+ P2 = a[(i >> 8) & 0x0F]; // Most significant digit (8-11 bits)
+
+ P3 = a[(i >> 4) & 0x0F]; // Middle digit (4-7 bits)
+
+ P1 = a[i & 0x0F]; // Least significant digit (0-3 bits)
+
+ delay(10); // Delay to make the count visible on displays
+
+ }
+
+ }
+
+}
